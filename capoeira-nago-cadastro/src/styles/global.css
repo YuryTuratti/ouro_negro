@@ -1,0 +1,158 @@
+/* ═══════════════════════════════════════════════════════════════
+   RESET & BASE STYLES
+   ═══════════════════════════════════════════════════════════════ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Paleta de Cores - OURO NEGRO (Atualizada com tons mais vivos) */
+  --color-bg-primary: #5A0A1A; /* Marsala/Bordô vivo */
+  --color-bg-secondary: #2A0515; /* Vinho profundo escuro */
+  --color-text-primary: #E8D7A8;
+  --color-text-secondary: #C9A961;
+  --color-accent: #D4AF37;
+  --color-accent-hover: #E8D7A8;
+  --color-card-bg: #7A1A2E; /* Vinho médio saturado */
+  --color-card-shadow: rgba(212, 175, 55, 0.3);
+  --color-input-bg: rgba(255, 255, 255, 0.05);
+  --color-input-border: #8B2940; /* Bordô mais vivo */
+  --color-error: #FF3B30;
+  --color-gold-vibrant: #D4AF37;
+  --color-gold-light: #E8D7A8;
+  --color-gold-dark: #9A7B3C;
+  --color-wine-dark: #2A0515; /* Profundo */
+  --color-wine-medium: #5A0A1A; /* Marsala vivo */
+  --color-wine-accent: #8B2940; /* Bordô saturado */
+  --color-wine-vibrant: #7A1A2E; /* Tom intermediário vibrante */
+  
+  /* Tipografia */
+  --font-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  --font-serif: 'Playfair Display', 'Georgia', serif;
+  
+  /* Spacing */
+  --spacing-xs: 8px;
+  --spacing-sm: 16px;
+  --spacing-md: 24px;
+  --spacing-lg: 40px;
+  --spacing-xl: 60px;
+  --spacing-2xl: 80px;
+  --spacing-3xl: 120px;
+  
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-pill: 980px;
+  
+  /* Transitions */
+  --transition-fast: 0.1s;
+  --transition-normal: 0.3s;
+  --transition-slow: 0.5s;
+  --easing-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --easing-apple: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-primary);
+  
+  /* Remove qualquer background anterior */
+  background: none;
+  
+  /* Aplica a nova imagem com overlay escuro para legibilidade */
+  background-image:
+    linear-gradient(to bottom, rgba(30, 5, 10, 0.90), rgba(30, 5, 10, 0.95)),
+    url('/fundo-pintura-dourada.png');
+  
+  /* Força a imagem a cobrir toda a tela */
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  
+  /* Garante altura mínima */
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  
+  color: var(--color-text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TYPOGRAPHY
+   ═══════════════════════════════════════════════════════════════ */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   UTILITIES
+   ═══════════════════════════════════════════════════════════════ */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FOCUS STYLES
+   ═══════════════════════════════════════════════════════════════ */
+
+*:focus-visible {
+  outline: 4px solid rgba(212, 175, 55, 0.5);
+  outline-offset: 2px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SCROLLBAR STYLING (webkit browsers)
+   ═══════════════════════════════════════════════════════════════ */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #2A0515;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D4AF37;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #E8D7A8;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
+}

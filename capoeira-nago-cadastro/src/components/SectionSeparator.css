@@ -1,0 +1,74 @@
+/* ═══════════════════════════════════════════════════════════════
+   SECTION SEPARATOR - PADRÃO TRIBAL ORNAMENTAL
+   ═══════════════════════════════════════════════════════════════ */
+
+.section-separator {
+  height: 80px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  
+  /* Padrão Tribal Dourado */
+  background-image: url('/tribal-pattern.png');
+  background-repeat: repeat-x;
+  background-size: auto 100%;
+  background-position: center;
+  
+  /* Efeitos de Destaque */
+  filter: brightness(1.2) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.6));
+  opacity: 0.3;
+  
+  /* Gradiente de Fade nas Laterais */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 15%,
+    black 85%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 15%,
+    black 85%,
+    transparent 100%
+  );
+}
+
+/* Camada de Brilho Dourado Sutil por cima */
+.section-separator::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(212, 175, 55, 0.2) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .section-separator {
+    height: 60px;
+    opacity: 0.25;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-separator {
+    height: 50px;
+    opacity: 0.2;
+  }
+}

@@ -1,0 +1,99 @@
+═══════════════════════════════════════════════════════════════════════
+  CAPOEIRA NAGO - GUIA RÁPIDO DE INSTALAÇÃO
+═══════════════════════════════════════════════════════════════════════
+
+📋 REQUISITOS
+-------------
+- Node.js versão 16 ou superior
+- npm versão 7 ou superior
+
+✅ PASSO A PASSO
+----------------
+
+1. Abra o terminal (PowerShell, CMD ou Terminal VS Code)
+
+2. Navegue até a pasta do projeto:
+   
+   cd c:\PROGRAMACAO\capoeira-nago-cadastro
+
+3. Instale as dependências:
+   
+   npm install
+   
+   (Aguarde alguns minutos enquanto as dependências são baixadas)
+
+4. Inicie o servidor de desenvolvimento:
+   
+   npm run dev
+   
+   (O navegador abrirá automaticamente em http://localhost:3000)
+
+🎉 PRONTO! A aplicação está rodando!
+
+═══════════════════════════════════════════════════════════════════════
+  COMANDOS ÚTEIS
+═══════════════════════════════════════════════════════════════════════
+
+📦 Instalar dependências:
+   npm install
+
+🚀 Iniciar modo desenvolvimento:
+   npm run dev
+
+🏗️ Criar build de produção:
+   npm run build
+
+👀 Visualizar build de produção:
+   npm run preview
+
+═══════════════════════════════════════════════════════════════════════
+  ESTRUTURA DO PROJETO
+═══════════════════════════════════════════════════════════════════════
+
+src/
+├── App.jsx                    # Componente principal
+├── main.jsx                   # Entry point
+├── components/
+│   ├── AnimatedTitle.jsx      # Título com animação
+│   ├── HeroSection.jsx        # Seção hero
+│   ├── FormSection.jsx        # Formulário de cadastro
+│   ├── Button.jsx             # Botão reutilizável
+│   └── ImagePlaceholder.jsx   # Espaço para imagem
+├── styles/
+│   └── global.css             # Estilos globais e variáveis
+└── utils/
+    └── validation.js          # Validação de formulário
+
+═══════════════════════════════════════════════════════════════════════
+  CARACTERÍSTICAS PRINCIPAIS
+═══════════════════════════════════════════════════════════════════════
+
+✨ Animação cinematográfica do título (5 fases)
+✨ Design premium inspirado na Apple
+✨ Formulário com validação em tempo real
+✨ Máscara automática para telefone brasileiro
+✨ 100% responsivo (mobile, tablet, desktop)
+✨ Acessível (WCAG AA)
+✨ Performance otimizada (60fps)
+
+═══════════════════════════════════════════════════════════════════════
+  CAMPOS DO FORMULÁRIO
+═══════════════════════════════════════════════════════════════════════
+
+1. Nome completo (nome e sobrenome obrigatórios)
+2. Email (validação de formato)
+3. Telefone (máscara automática: (XX) XXXXX-XXXX)
+4. Idade (entre 1 e 120 anos)
+5. Cidade (mínimo 2 caracteres)
+
+═══════════════════════════════════════════════════════════════════════
+  PRECISA DE AJUDA?
+═══════════════════════════════════════════════════════════════════════
+
+📖 Documentação completa: Veja o arquivo README.md
+🐛 Problemas? Verifique se o Node.js está instalado: node --version
+💡 Dica: Use o navegador Chrome ou Edge para melhor experiência
+
+═══════════════════════════════════════════════════════════════════════
+
+Desenvolvido com ❤️ para o evento CAPOEIRA NAGO

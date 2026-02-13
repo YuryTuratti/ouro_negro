@@ -1,0 +1,49 @@
+/* =========================================
+   1. HERO SECTION (O Container Principal)
+   ========================================= */
+.hero-container {
+  display: flex;
+  align-items: center; /* ISSO É O SEGREDO: Centraliza verticalmente */
+  justify-content: space-between; /* Joga um pra esquerda, outro pra direita */
+  width: 100%;
+  max-width: 1200px; /* Limita a largura pra não esticar demais */
+  margin: 0 auto; /* Centraliza o container na tela */
+  padding: 0 20px; /* Dá um respiro nas laterais */
+  height: 100vh; /* Garante que ocupe a altura da tela inteira */
+}
+
+/* =========================================
+   2. LADO ESQUERDO (Texto e Título)
+   ========================================= */
+.hero-content-left {
+  flex: 1; /* Ocupa metade do espaço */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start; /* Alinha texto à esquerda */
+  padding-right: 50px; /* Afasta um pouco do carrossel */
+}
+
+/* =========================================
+   3. LADO DIREITO (O Carrossel) - O QUE ESTAVA QUEBRANDO
+   ========================================= */
+.ministrantes-carousel {
+  flex: 1; /* Ocupa a outra metade */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
+  /* AQUI ESTÁ A CORREÇÃO: */
+  margin-top: 0 !important; /* Removemos aquela margem gigante */
+}
+
+/* Ajuste fino para a foto não ficar gigante nem minúscula */
+.ministrantes-carousel__image-wrapper {
+  width: 280px;  /* Tamanho ideal */
+  height: 350px;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* Sombra bonita */
+}

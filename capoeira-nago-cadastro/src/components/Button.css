@@ -1,0 +1,153 @@
+/* ═══════════════════════════════════════════════════════════════
+   BUTTON COMPONENT STYLES
+   ═══════════════════════════════════════════════════════════════ */
+
+.button {
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 18px 60px;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+  transition: all 0.3s var(--easing-smooth);
+  font-family: var(--font-primary);
+  text-align: center;
+  display: inline-block;
+  text-decoration: none;
+}
+
+/* Primary Button - Gradiente Ouro Polido (Sem Textura) */
+.button--primary {
+  background: linear-gradient(to bottom, #d4af37, #edc967, #d4af37);
+  background-size: 100% 200%;
+  background-position: center;
+  color: #3b2a1a;
+  border-radius: var(--radius-pill);
+  border: 1px solid #fffacd;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  box-shadow: 
+    0 0 15px rgba(212, 175, 55, 0.5),
+    0 4px 12px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.button--primary:hover:not(:disabled) {
+  background-position: center top;
+  transform: scale(1.05) translateY(-2px);
+  box-shadow: 
+    0 0 25px rgba(212, 175, 55, 0.7),
+    0 6px 20px rgba(0, 0, 0, 0.4),
+    inset 0 2px 0 rgba(255, 255, 255, 0.4);
+  border-color: #ffffff;
+}
+
+.button--primary:active:not(:disabled) {
+  transform: scale(0.98);
+  transition: all 0.1s;
+}
+
+.button--primary:focus-visible {
+  outline: 4px solid rgba(52, 199, 89, 0.3);
+  outline-offset: 2px;
+}
+
+/* Secondary Button - Para formulário (Gradiente Polido) */
+.button--secondary {
+  background: linear-gradient(to bottom, #d4af37, #edc967, #d4af37);
+  background-size: 100% 200%;
+  background-position: center;
+  color: #3b2a1a;
+  border-radius: var(--radius-md);
+  border: 1px solid #fffacd;
+  width: 100%;
+  margin-top: 20px;
+  padding: 18px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: 
+    0 0 15px rgba(212, 175, 55, 0.4),
+    0 4px 12px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.button--secondary:hover:not(:disabled) {
+  background-position: center top;
+  transform: translateY(-2px);
+  box-shadow: 
+    0 0 25px rgba(212, 175, 55, 0.6),
+    0 6px 20px rgba(0, 0, 0, 0.4),
+    inset 0 2px 0 rgba(255, 255, 255, 0.4);
+  border-color: #ffffff;
+}
+
+.button--secondary:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* Disabled state */
+.button:disabled {
+  background: #C7C7CC;
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none !important;
+}
+
+/* Outline Button - Para lotes futuros */
+.button--outline {
+  background: transparent;
+  color: rgba(212, 175, 55, 0.8);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  border-radius: var(--radius-pill);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.button--outline:hover:not(:disabled) {
+  border-color: rgba(212, 175, 55, 0.7);
+  background: rgba(212, 175, 55, 0.1);
+  transform: translateY(-2px);
+}
+
+.button--outline:disabled {
+  background: transparent;
+  color: rgba(212, 175, 55, 0.4);
+  border-color: rgba(212, 175, 55, 0.2);
+  opacity: 0.6;
+}
+
+/* Disabled variant - Para lotes encerrados */
+.button--disabled {
+  background: rgba(120, 120, 120, 0.3);
+  color: rgba(200, 200, 200, 0.5);
+  border: 1px solid rgba(150, 150, 150, 0.2);
+  border-radius: var(--radius-pill);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.button--disabled:hover {
+  transform: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .button--primary {
+    padding: 16px 40px;
+    font-size: 1rem;
+  }
+  
+  .button--secondary {
+    font-size: 1.05rem;
+  }
+}

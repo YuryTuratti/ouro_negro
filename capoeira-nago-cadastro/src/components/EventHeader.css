@@ -1,0 +1,101 @@
+/* ═══════════════════════════════════════════════════════════════
+   EVENT HEADER COMPONENT STYLES - BOTÃO + TÍTULO NA MESMA LINHA
+   ═══════════════════════════════════════════════════════════════ */
+
+.event-header {
+  padding: 0 var(--spacing-xl);
+  margin-top: 40px;
+  margin-bottom: 50px;
+  background: transparent;
+}
+
+.event-header__container {
+  max-width: 1400px;
+  margin: 0 auto;
+  
+  /* Layout Centralizado */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Título Centralizado */
+.event-header__title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  
+  /* Gradiente Dourado com Destaque */
+  background: linear-gradient(180deg, #E8D7A8 0%, #D4AF37 50%, #9A7B3C 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  
+  font-family: 'Bebas Neue', var(--font-serif);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-align: center;
+  
+  /* Sublinhado Dourado para Destaque */
+  position: relative;
+  padding-bottom: 12px;
+}
+
+.event-header__title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent 0%, #D4AF37 50%, transparent 100%);
+  border-radius: 2px;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+/* Responsividade - Tablet */
+@media (max-width: 1024px) {
+  .event-header {
+    padding: 0 var(--spacing-lg);
+    margin-top: 35px;
+    margin-bottom: 40px;
+  }
+
+  .event-header__title {
+    font-size: 2.2rem;
+  }
+}
+
+/* Responsividade - Mobile */
+@media (max-width: 768px) {
+  .event-header {
+    padding: 0 var(--spacing-md);
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+
+  .event-header__title {
+    font-size: 2rem;
+  }
+
+  .event-header__title::after {
+    width: 80%;
+  }
+}
+
+/* Mobile pequeno */
+@media (max-width: 480px) {
+  .event-header {
+    padding: 0 var(--spacing-sm);
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }
+
+  .event-header__title {
+    font-size: 1.75rem;
+  }
+
+  .event-header__title::after {
+    width: 90%;
+  }
+}

@@ -1,0 +1,266 @@
+/* ═══════════════════════════════════════════════════════════════
+   CARDS SECTION COMPONENT STYLES - ESTILO APPLE
+   ═══════════════════════════════════════════════════════════════ */
+
+.cards-section {
+  margin-top: 0;
+  margin-bottom: 100px;
+  padding: 0 var(--spacing-xl);
+  background: transparent;
+}
+
+.cards-section__container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+
+
+/* Grid de Cards */
+.cards-section__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* Card Individual - Glassmorphism (Vidro Fosco) */
+.card {
+  border-radius: 18px;
+  padding: 40px 30px;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  
+  /* Efeito de Vidro Escuro */
+  background: rgba(20, 5, 10, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  
+  /* Bordas e Sombras */
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  overflow: hidden;
+  transform: translateY(0);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  background: rgba(25, 8, 12, 0.55);
+  border-color: rgba(255, 215, 0, 0.6);
+  box-shadow: 
+    0 12px 40px 0 rgba(0, 0, 0, 0.5),
+    0 0 30px rgba(212, 175, 55, 0.3);
+}
+
+/* Conteúdo Superior do Card */
+.card__content {
+  flex: 1;
+}
+
+.card__sobretitle {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 12px;
+  line-height: 1.4;
+  
+  /* Gradiente Dourado Suave */
+  background: linear-gradient(180deg, #E8D7A8 0%, #D4AF37 50%, #9A7B3C 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.card__title {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 12px;
+  font-family: var(--font-serif);
+  
+  /* Gradiente Dourado */
+  background: linear-gradient(180deg, #E8D7A8 0%, #D4AF37 50%, #9A7B3C 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.card__subtitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  line-height: 1.3;
+  
+  /* Gradiente Dourado */
+  background: linear-gradient(180deg, #E8D7A8 0%, #D4AF37 50%, #9A7B3C 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.card__info {
+  font-size: 1rem;
+  margin-bottom: 30px;
+  line-height: 1.5;
+}
+
+/* Área de Imagem - Glassmorphism */
+.card__image {
+  aspect-ratio: 4/3;
+  width: 100%;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: auto;
+  
+  /* Vidro mais escuro para a área de imagem */
+  background: rgba(15, 3, 8, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 215, 0, 0.15);
+  
+  transition: all 0.3s ease;
+}
+
+.card:hover .card__image {
+  transform: scale(1.02);
+  background: rgba(20, 5, 10, 0.6);
+  border-color: rgba(255, 215, 0, 0.3);
+}
+
+.card__image-text {
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Responsividade - Tablet */
+@media (max-width: 1024px) {
+  .cards-section {
+    padding: 0 var(--spacing-lg);
+    margin-top: 0;
+    margin-bottom: 80px;
+  }
+
+  .cards-section__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  .card {
+    min-height: 450px;
+    padding: 35px 25px;
+  }
+
+  .card__title {
+    font-size: 1.8rem;
+  }
+
+  .card__subtitle {
+    font-size: 1.1rem;
+  }
+}
+
+/* Responsividade - Mobile */
+@media (max-width: 768px) {
+  .cards-section {
+    padding: 0 var(--spacing-md);
+    margin-top: 0;
+    margin-bottom: 60px;
+  }
+
+  .cards-section__grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .card {
+    min-height: 420px;
+    padding: 30px 24px;
+  }
+
+  .card__sobretitle {
+    font-size: 0.8rem;
+  }
+
+  .card__title {
+    font-size: 1.65rem;
+  }
+
+  .card__subtitle {
+    font-size: 1.05rem;
+  }
+
+  .card__info {
+    font-size: 0.95rem;
+    margin-bottom: 25px;
+  }
+}
+
+/* Mobile pequeno */
+@media (max-width: 480px) {
+  .cards-section {
+    padding: 0 var(--spacing-sm);
+    margin-top: 0;
+    margin-bottom: 50px;
+  }
+
+  .card {
+    min-height: 400px;
+    padding: 25px 20px;
+    border-radius: 16px;
+  }
+
+  .card__title {
+    font-size: 1.5rem;
+  }
+
+  .card__subtitle {
+    font-size: 1rem;
+  }
+
+  .card__image {
+    border-radius: 10px;
+  }
+}
+
+/* Acessibilidade - Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
+  
+  .card:hover {
+    transform: none;
+  }
+  
+  .card__image {
+    transition: none;
+  }
+  
+  .card:hover .card__image {
+    transform: none;
+  }
+}
+
+/* Focus states para acessibilidade */
+.card:focus {
+  outline: 4px solid rgba(212, 175, 55, 0.5);
+  outline-offset: 4px;
+}
+
+.card:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.card:focus-visible {
+  outline: 4px solid rgba(0, 168, 107, 0.3);
+  outline-offset: 4px;
+}
