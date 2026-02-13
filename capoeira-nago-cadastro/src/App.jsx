@@ -32,7 +32,7 @@ function App() {
   return (
     <div className="app">
       <HeroSection />
-      <EventHeader />
+      <EventHeader onCTAClick={handleOpenModal} />
       <CardsSection />
       <InvestmentSection />
       
