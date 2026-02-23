@@ -1,12 +1,14 @@
 /* ═══════════════════════════════════════════════════════════════
-   CARDS SECTION COMPONENT STYLES - ESTILO APPLE
+   CARDS SECTION COMPONENT STYLES - ESTILO APPLE (COM SCROLL HORIZONTAL)
    ═══════════════════════════════════════════════════════════════ */
 
 .cards-section {
   margin-top: 0;
   margin-bottom: 100px;
-  padding: 0 var(--spacing-xl);
+  /* Retiramos o padding lateral aqui para a barra de scroll colar às bordas do ecrã */
+  padding: 0; 
   background: transparent;
+  width: 100%;
 }
 
 .cards-section__container {
@@ -14,17 +16,34 @@
   margin: 0 auto;
 }
 
-
-
-/* Grid de Cards */
+/* Container do Scroll Horizontal */
 .cards-section__grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex; /* Mudámos de grid para flex */
   gap: 20px;
+  padding: 20px var(--spacing-xl); /* Mantemos o espaçamento interno */
+  
+  /* Configurações mágicas do Scroll Horizontal */
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory; /* Faz o scroll "parar" no sítio certo */
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch; /* Scroll suave no iOS */
+  
+  /* Esconder a barra de scroll em alguns navegadores (opcional, deixa mais limpo) */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Esconder a barra de scroll no Chrome/Safari */
+.cards-section__grid::-webkit-scrollbar {
+  display: none;
 }
 
 /* Card Individual - Glassmorphism (Vidro Fosco) */
 .card {
+  /* No flexbox, precisamos de definir um tamanho base para não encolherem */
+  flex: 0 0 calc(33.333% - 14px); /* 3 cards visíveis no desktop */
+  scroll-snap-align: start; /* Onde o scroll deve parar (no início do card) */
+  
   border-radius: 18px;
   padding: 40px 30px;
   min-height: 500px;
@@ -141,20 +160,20 @@
   padding: 20px;
 }
 
-/* Responsividade - Tablet */
+/* 📱 Responsividade - Tablet */
 @media (max-width: 1024px) {
   .cards-section {
-    padding: 0 var(--spacing-lg);
-    margin-top: 0;
     margin-bottom: 80px;
   }
 
   .cards-section__grid {
-    grid-template-columns: repeat(2, 1fr);
+    padding: 20px var(--spacing-lg);
     gap: 18px;
   }
 
   .card {
+    /* Mostra 2 cards e um "pedacinho" do próximo para indicar que tem scroll */
+    flex: 0 0 calc(65% - 10px); 
     min-height: 450px;
     padding: 35px 25px;
   }
@@ -168,20 +187,22 @@
   }
 }
 
-/* Responsividade - Mobile */
+/* 📱 Responsividade - Mobile */
 @media (max-width: 768px) {
   .cards-section {
-    padding: 0 var(--spacing-md);
-    margin-top: 0;
     margin-bottom: 60px;
   }
 
   .cards-section__grid {
-    grid-template-columns: 1fr;
+    padding: 20px var(--spacing-md);
     gap: 16px;
+    /* Adicionamos um espaçamento extra no final para o último card não ficar colado */
+    padding-right: calc(var(--spacing-md) * 2); 
   }
 
   .card {
+    /* Mostra 1 card e um "pedacinho" do próximo */
+    flex: 0 0 calc(85% - 10px); 
     min-height: 420px;
     padding: 30px 24px;
   }
@@ -204,15 +225,21 @@
   }
 }
 
-/* Mobile pequeno */
+/* 📱 Mobile pequeno */
 @media (max-width: 480px) {
   .cards-section {
-    padding: 0 var(--spacing-sm);
-    margin-top: 0;
     margin-bottom: 50px;
   }
 
+  .cards-section__grid {
+    padding: 15px var(--spacing-sm);
+    gap: 12px;
+    padding-right: calc(var(--spacing-sm) * 2);
+  }
+
   .card {
+    /* Ocupa quase a tela toda, mas deixa a borda do próximo visível */
+    flex: 0 0 calc(90% - 10px); 
     min-height: 400px;
     padding: 25px 20px;
     border-radius: 16px;
@@ -233,6 +260,10 @@
 
 /* Acessibilidade - Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
+  .cards-section__grid {
+    scroll-behavior: auto;
+  }
+  
   .card {
     transition: none;
   }

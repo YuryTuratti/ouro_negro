@@ -3,10 +3,10 @@
    ═══════════════════════════════════════════════════════════════ */
 
 .hero-section {
-  height: 100vh;
+  height: 90vh;
   display: flex;
   align-items: flex-start;
-  padding-top: 60px;
+  padding-top: 0px;
   padding-right: var(--spacing-xl);
   padding-bottom: 40px;
   padding-left: var(--spacing-xl);
