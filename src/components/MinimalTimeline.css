@@ -267,9 +267,221 @@
   text-align: left;
 }
 
-/* ==========================================================================
-   CORREÇÃO DEFINITIVA MOBILE - TIMELINE
-   ========================================================================== */
+@media (min-width: 769px) {
+  .timeline-backdrop {
+    display: none !important;
+  }
+}
+
+.minimal-timeline-container {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.minimal-timeline-nav {
+  position: relative;
+  width: 100%;
+  height: 100px;
+}
+
+/* --- LINHA CURVA SVG --- */
+.svg-curve-container {
+  position: absolute;
+  top: 15px;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.timeline-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.timeline-path {
+  fill: none;
+  stroke: #D4AF37;
+  stroke-width: 1px;
+  filter: drop-shadow(0 0 2px rgba(212, 175, 55, 0.5));
+}
+
+/* --- PONTOS E LABEL --- */
+.timeline-points-wrapper {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  z-index: 50; 
+  padding: 0 5%;
+}
+
+.timeline-point-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  width: 80px;
+  position: relative;
+  z-index: 45; 
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.timeline-dot-container {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+
+.timeline-dot {
+  width: 10px;
+  height: 10px;
+  border: 2px solid #D4AF37;
+  border-radius: 50%;
+  z-index: 2;
+  transition: background 0.8s ease, transform 0.8s ease, box-shadow 0.8s ease; 
+}
+
+.timeline-dot-ripple {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(212, 175, 55, 0.2);
+  transition: transform 0.8s ease, opacity 0.8s ease; 
+}
+
+.timeline-point-item.active {
+  z-index: 60; 
+}
+
+.timeline-point-item.active .timeline-dot {
+  background: #FFD700 !important;
+  transform: scale(1.3) !important;
+  box-shadow: 0 0 15px #FFD700 !important;
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease !important; 
+}
+
+.timeline-point-item.active .timeline-dot-ripple {
+  transform: scale(1.6) !important;
+  opacity: 1 !important;
+  animation: pulseRipple 1.5s infinite !important;
+  transition: transform 0.3s ease, opacity 0.3s ease !important; 
+}
+
+@keyframes pulseRipple {
+  0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
+  100% { box-shadow: 0 0 0 10px rgba(212, 175, 55, 0); }
+}
+
+.day-name {
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+  transition: color 0.8s ease;
+}
+
+.day-date {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.7rem;
+  color: #555;
+  margin-top: 2px;
+}
+
+.timeline-point-item.active .day-name { 
+  color: #FFD700 !important; 
+  transition: color 0.3s ease !important;
+}
+
+/* --- POPUP / TOOLTIP --- */
+.timeline-popup {
+  position: absolute;
+  bottom: 50px; 
+  left: 50%;
+  transform: translateX(-50%);
+  width: 240px;
+  background: rgba(15, 15, 15, 0.95);
+  border: 1px solid #D4AF37;
+  border-radius: 8px;
+  padding: 12px;
+  z-index: 100;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+  animation: popupIn 0.3s ease forwards;
+}
+
+@keyframes popupIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+.popup-arrow {
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 10px;
+  height: 10px;
+  background: #0f0f0f;
+  border-bottom: 1px solid #D4AF37;
+  border-right: 1px solid #D4AF37;
+}
+
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+}
+
+.popup-day-title {
+  color: #FFD700;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.popup-close-btn {
+  background: transparent;
+  border: none;
+  color: #888;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0 5px;
+}
+
+.popup-event-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.popup-event-row:last-child { border-bottom: none; }
+
+.popup-time {
+  color: #FFD700;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem;
+  min-width: 35px;
+}
+
+.popup-title {
+  color: #ddd;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.8rem;
+  line-height: 1.2;
+  text-align: left;
+}
+
+/* --- CORREÇÃO DEFINITIVA MOBILE --- */
 @media (max-width: 768px) {
   .minimal-timeline-section {
     padding: 20px 0 100px;
@@ -277,7 +489,7 @@
   }
 
   .minimal-timeline-container {
-    padding: 0 10px;
+    padding: 0 15px;
     max-width: 100%;
   }
 
@@ -289,52 +501,37 @@
   .timeline-point-item {
     width: auto;
     flex: 1;
-    position: relative; 
   }
 
-  .day-name { font-size: 0.6rem; }
-  .day-date { font-size: 0.55rem; }
-
-  /* --- POP-UP CONFIG GERAL --- */
   .timeline-popup {
-    width: 200px;
+    width: 85vw; 
+    max-width: 250px;
     bottom: 55px;
-    padding: 10px;
     left: 50%;
     transform: translateX(-50%);
   }
 
-  .popup-time { font-size: 0.9rem; }
-  .popup-title { font-size: 0.75rem; }
-
-  /* --- AJUSTE INTELIGENTE POR POSIÇÃO --- */
+  /* Ajuste para o primeiro ponto (esquerda) */
   .timeline-point-item:first-child .timeline-popup {
-    left: 70%;
-    transform: translateX(-35%); 
+    left: 0;
+    transform: translateX(0);
+    margin-left: -5px;
   }
-  
   .timeline-point-item:first-child .popup-arrow {
-    left: 35%; 
-    transform: translateX(-50%) rotate(45deg);
+    left: 20px;
+    transform: rotate(45deg);
   }
 
-  .timeline-point-item:nth-child(2) .timeline-popup {
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  
-  .timeline-point-item:nth-child(2) .popup-arrow {
-    left: 50%;
-    transform: translateX(-50%) rotate(45deg);
-  }
-
+  /* Ajuste para o último ponto (direita) */
   .timeline-point-item:last-child .timeline-popup {
-    left: 25%;
-    transform: translateX(-65%); 
+    left: auto;
+    right: 0;
+    transform: translateX(0);
+    margin-right: -5px;
   }
-  
   .timeline-point-item:last-child .popup-arrow {
-    left: 65%; 
-    transform: translateX(-50%) rotate(45deg);
+    left: auto;
+    right: 20px;
+    transform: rotate(45deg);
   }
 }

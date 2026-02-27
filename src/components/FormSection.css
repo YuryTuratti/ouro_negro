@@ -13,7 +13,7 @@
 
 .form-section__container {
   width: 100%;
-  max-width: 540px;
+  max-width: 800px; 
   margin: 0 auto;
 }
 
@@ -43,12 +43,21 @@
   font-size: 1.1rem;
   text-align: center;
   margin-bottom: 50px;
-  
-  /* Gradiente Dourado */
   background: linear-gradient(180deg, #E8D7A8 0%, #D4AF37 50%, #9A7B3C 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+.form-section__group-title {
+  font-family: 'Bebas Neue', var(--font-serif);
+  font-size: 1.5rem;
+  color: #D4AF37;
+  margin: 40px 0 20px 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 /* Success Message */
@@ -66,20 +75,25 @@
 }
 
 @keyframes successFadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Grid System */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 20px; 
 }
 
 /* Form Groups */
 .form-group {
   margin-bottom: 28px;
   position: relative;
+}
+
+.form-group--full {
+  grid-column: span 2;
 }
 
 .form-label {
@@ -96,7 +110,9 @@
 }
 
 /* Form Inputs */
-.form-input {
+.form-input,
+.form-select,
+.form-textarea {
   width: 100%;
   padding: 16px 20px;
   font-size: 1.05rem;
@@ -111,11 +127,33 @@
   appearance: none;
 }
 
-.form-input::placeholder {
+.form-select {
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23E8D7A8%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: right 15px top 50%;
+  background-size: 12px auto;
+}
+
+/* 🟢 CORREÇÃO: Fundo escuro nas opções do select */
+.form-select option {
+  background-color: #2A0515;
+  color: #E8D7A8;
+  padding: 10px;
+}
+
+.form-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
   color: rgba(232, 215, 168, 0.5);
 }
 
-.form-input:focus {
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
   border-color: #D4AF37;
   background: rgba(255, 255, 255, 0.08);
   outline: none;
@@ -132,7 +170,6 @@
   box-shadow: 0 0 0 4px rgba(255, 59, 48, 0.1);
 }
 
-/* Remove spinner from number input */
 .form-input[type="number"]::-webkit-inner-spin-button,
 .form-input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
@@ -142,6 +179,55 @@
 .form-input[type="number"] {
   -moz-appearance: textfield;
   appearance: textfield;
+}
+
+/* 🟢 CORREÇÃO: Radio Buttons Customizados */
+.form-radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 5px;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #E8D7A8;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.radio-label input[type="radio"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #D4AF37;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.2);
+  position: relative;
+  cursor: pointer;
+  margin: 0;
+  transition: all 0.2s ease;
+}
+
+.radio-label input[type="radio"]:checked {
+  border-color: #FFD700;
+}
+
+.radio-label input[type="radio"]:checked::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  background-color: #FFD700;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
 }
 
 /* Error Messages */
@@ -173,7 +259,17 @@
     margin-bottom: var(--spacing-lg);
   }
   
-  .form-input {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-group--full {
+    grid-column: span 1;
+  }
+
+  .form-input,
+  .form-select,
+  .form-textarea {
     font-size: 1rem;
     padding: 14px 18px;
   }
@@ -214,14 +310,8 @@
 .form-group:nth-child(5) { animation-delay: 0.5s; }
 
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* Accessibility improvements */
