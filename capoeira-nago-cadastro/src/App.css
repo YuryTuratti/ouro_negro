@@ -1,0 +1,21 @@
+/* ═══════════════════════════════════════════════════════════════
+   APP COMPONENT STYLES
+   ═══════════════════════════════════════════════════════════════ */
+
+.app {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: transparent;
+  position: relative;
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Optimization for animations */
+.app * {
+  will-change: auto;
+}

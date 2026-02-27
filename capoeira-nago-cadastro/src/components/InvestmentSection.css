@@ -1,0 +1,376 @@
+/* ═══════════════════════════════════════════════════════════════
+   INVESTMENT SECTION - PREÇOS E LOTES
+   ═══════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
+
+.investment-section {
+  padding: 20px var(--spacing-xl) 100px var(--spacing-xl);
+  background: transparent;
+  position: relative;
+}
+
+.investment-section__container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Título Principal */
+.investment-section__title {
+  font-size: 3rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 60px;
+  
+  /* Gradiente Dourado */
+  background: linear-gradient(180deg, #E8D7A8 0%, #D4AF37 50%, #9A7B3C 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  
+  font-family: 'Bebas Neue', var(--font-serif);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  
+  /* Efeito de brilho */
+  text-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+}
+
+/* Grid de Cards */
+.investment-section__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
+/* Card Individual */
+.investment-card {
+  position: relative;
+  padding: 50px 30px 40px 30px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  
+  /* Glassmorphism */
+  background: rgba(20, 5, 10, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  
+  /* Borda Dourada */
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 12px;
+  
+  /* Sombra Sutil */
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  overflow: hidden;
+}
+
+.investment-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.investment-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(212, 175, 55, 0.6);
+  box-shadow: 
+    0 12px 40px rgba(212, 175, 55, 0.2),
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.investment-card:hover::before {
+  opacity: 1;
+}
+
+/* Card em Destaque (1º Lote) */
+.investment-card--destaque {
+  transform: scale(1.05);
+  border: 2px solid rgba(212, 175, 55, 0.5);
+  background: rgba(20, 5, 10, 0.75);
+  
+  box-shadow: 
+    0 0 40px rgba(212, 175, 55, 0.3),
+    0 12px 40px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.investment-card--destaque:hover {
+  transform: scale(1.08) translateY(-8px);
+}
+
+/* Card ACTIVE (Lote Vigente) */
+.investment-card--active {
+  opacity: 1;
+}
+
+/* Card EXPIRED (Lote Encerrado) */
+.investment-card--expired {
+  opacity: 0.5;
+  filter: grayscale(0.8);
+}
+
+.investment-card--expired:hover {
+  transform: none;
+}
+
+/* Card FUTURE (Lote Futuro) */
+.investment-card--future {
+  opacity: 0.75;
+}
+
+.investment-card--future:hover {
+  transform: translateY(-5px);
+}
+
+/* Badge "Melhor Valor" */
+.investment-card__badge {
+  position: absolute;
+  top: 20px;
+  right: -35px;
+  background: linear-gradient(135deg, #D4AF37, #9A7B3C);
+  color: #000;
+  padding: 6px 40px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transform: rotate(45deg);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Número do Lote */
+.investment-card__numero {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 0 0 20px 0;
+  
+  /* Gradiente Dourado */
+  background: linear-gradient(180deg, #E8D7A8 0%, #D4AF37 50%, #9A7B3C 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Preço */
+.investment-card__preco {
+  font-family: 'Bebas Neue', var(--font-serif);
+  font-size: 4rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin: 0;
+  
+  /* Gradiente Dourado */
+  background: linear-gradient(180deg, #E8D7A8 0%, #D4AF37 50%, #9A7B3C 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  
+  text-shadow: 
+    0 2px 20px rgba(212, 175, 55, 0.5),
+    0 0 40px rgba(212, 175, 55, 0.3);
+}
+
+.investment-card--destaque .investment-card__preco {
+  font-size: 4.5rem;
+  background: linear-gradient(180deg, #FCF6BA 0%, #D4AF37 50%, #9A7B3C 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Período do Lote */
+.investment-card__periodo {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: rgba(242, 240, 230, 0.7);
+  margin: 15px 0 25px 0;
+  letter-spacing: 0.5px;
+  line-height: 1.5;
+}
+
+/* Botão de Ação */
+.investment-card__button {
+  margin-top: auto;
+  width: 100%;
+}
+
+.investment-card__button .button {
+  width: 100%;
+  font-size: 0.95rem;
+  padding: 14px 24px;
+}
+
+/* Card Indisponível (deprecated - usar classes de estado) */
+.investment-card--indisponivel {
+  opacity: 0.6;
+}
+
+/* Aviso de Abertura */
+.investment-section__notice {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 40px;
+  
+  /* Glassmorphism */
+  background: rgba(212, 175, 55, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 8px;
+  
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.investment-section__notice-text {
+  font-family: 'Playfair Display', 'Georgia', serif;
+  font-size: 1.1rem;
+  font-style: italic;
+  color: #F2F0E6;
+  margin: 0;
+  letter-spacing: 0.5px;
+  line-height: 1.6;
+}
+
+.investment-section__notice-text strong {
+  color: #D4AF37;
+  font-weight: 600;
+  font-style: normal;
+}
+
+/* Responsividade - Tablet */
+@media (max-width: 1024px) {
+  .investment-section {
+    padding: 20px var(--spacing-lg) 80px var(--spacing-lg);
+  }
+
+  .investment-section__title {
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+  }
+
+  .investment-section__grid {
+    gap: 30px;
+  }
+
+  .investment-card__preco {
+    font-size: 3.5rem;
+  }
+
+  .investment-card--destaque .investment-card__preco {
+    font-size: 4rem;
+  }
+
+  .investment-card__periodo {
+    font-size: 0.9rem;
+  }
+}
+
+/* Responsividade - Mobile */
+@media (max-width: 768px) {
+  .investment-section {
+    padding: 20px var(--spacing-md) 60px var(--spacing-md);
+  }
+
+  .investment-section__title {
+    font-size: 2rem;
+    margin-bottom: 40px;
+  }
+
+  .investment-section__grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    margin-bottom: 40px;
+  }
+
+  .investment-card {
+    padding: 40px 25px;
+  }
+
+  .investment-card--destaque {
+    transform: scale(1);
+  }
+
+  .investment-card--destaque:hover {
+    transform: translateY(-8px);
+  }
+
+  .investment-card__badge {
+    font-size: 0.7rem;
+    padding: 5px 35px;
+  }
+
+  .investment-card__preco {
+    font-size: 3rem;
+  }
+
+  .investment-card--destaque .investment-card__preco {
+    font-size: 3.5rem;
+  }
+
+  .investment-card__periodo {
+    font-size: 0.85rem;
+  }
+
+  .investment-section__notice {
+    flex-direction: column;
+    padding: 25px 30px;
+    text-align: center;
+  }
+
+  .investment-section__notice-text {
+    font-size: 1rem;
+  }
+}
+
+/* Mobile Pequeno */
+@media (max-width: 480px) {
+  .investment-section {
+    padding: 15px var(--spacing-sm) 50px var(--spacing-sm);
+  }
+
+  .investment-section__title {
+    font-size: 1.75rem;
+  }
+
+  .investment-card {
+    padding: 35px 20px;
+  }
+
+  .investment-card__preco {
+    font-size: 2.5rem;
+  }
+
+  .investment-card--destaque .investment-card__preco {
+    font-size: 3rem;
+  }
+
+  .investment-card__periodo {
+    font-size: 0.8rem;
+  }
+
+  .investment-section__notice {
+    padding: 20px 25px;
+  }
+
+  .investment-section__notice-text {
+    font-size: 0.95rem;
+  }
+}
