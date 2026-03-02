@@ -1,6 +1,3 @@
-/* ==========================================================================
-   MINIMAL TIMELINE - FINAL ADJUSTED (COM EFEITO SEQUENCIAL)
-   ========================================================================== */
 
 .minimal-timeline-section {
   width: 100%;
@@ -20,7 +17,6 @@
   background-clip: text;
 }
 
-/* --- AVISO DISCRETO --- */
 .timeline-instruction {
   text-align: center;
   font-family: 'Montserrat', sans-serif;
@@ -37,7 +33,6 @@
   50% { opacity: 1; }
 }
 
-/* --- BACKDROP INVISÍVEL (Pára não atrapalhar o PC) --- */
 .timeline-backdrop {
   position: fixed;
   top: 0;
@@ -48,7 +43,6 @@
   background: transparent;
 }
 
-/* Esconde o backdrop no PC para o hover funcionar liso */
 @media (min-width: 769px) {
   .timeline-backdrop {
     display: none !important;
@@ -67,7 +61,6 @@
   height: 100px;
 }
 
-/* --- LINHA CURVA SVG --- */
 .svg-curve-container {
   position: absolute;
   top: 15px;
@@ -91,225 +84,6 @@
   filter: drop-shadow(0 0 2px rgba(212, 175, 55, 0.5));
 }
 
-/* --- PONTOS E LABEL --- */
-.timeline-points-wrapper {
-  display: flex;
-  justify-content: space-between;
-  position: relative;
-  z-index: 50; 
-  padding: 0 5%;
-}
-
-.timeline-point-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-  width: 80px;
-  position: relative;
-  z-index: 45; 
-  -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
-}
-
-.timeline-dot-container {
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 5px;
-}
-
-/* 🟢 ESTADO BASE DO PONTO */
-.timeline-dot {
-  width: 10px;
-  height: 10px;
-  border: 2px solid #D4AF37;
-  border-radius: 50%;
-  z-index: 2;
-  transition: background 0.8s ease, transform 0.8s ease, box-shadow 0.8s ease; 
-}
-
-/* 🟢 ESTADO BASE DA ONDA */
-.timeline-dot-ripple {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background: rgba(212, 175, 55, 0.2);
-  transition: transform 0.8s ease, opacity 0.8s ease; 
-}
-
-.timeline-point-item.active {
-  z-index: 60; 
-}
-
-/* 🟢 PONTO ATIVO / HOVER (BLINDADO COM !important) */
-.timeline-point-item.active .timeline-dot {
-  background: #FFD700 !important;
-  transform: scale(1.3) !important;
-  box-shadow: 0 0 15px #FFD700 !important;
-  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease !important; 
-}
-
-/* 🟢 ONDA ATIVA / HOVER (BLINDADA) */
-.timeline-point-item.active .timeline-dot-ripple {
-  transform: scale(1.6) !important;
-  opacity: 1 !important;
-  animation: pulseRipple 1.5s infinite !important;
-  transition: transform 0.3s ease, opacity 0.3s ease !important; 
-}
-
-@keyframes pulseRipple {
-  0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
-  100% { box-shadow: 0 0 0 10px rgba(212, 175, 55, 0); }
-}
-
-.day-name {
-  font-family: 'Cinzel', serif;
-  font-weight: 700;
-  font-size: 0.8rem;
-  transition: color 0.8s ease;
-}
-
-.day-date {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 0.7rem;
-  color: #555;
-  margin-top: 2px;
-}
-
-.timeline-point-item.active .day-name { 
-  color: #FFD700 !important; 
-  transition: color 0.3s ease !important;
-}
-
-/* --- POPUP / TOOLTIP --- */
-.timeline-popup {
-  position: absolute;
-  bottom: 50px; 
-  left: 50%;
-  transform: translateX(-50%);
-  width: 240px;
-  background: rgba(15, 15, 15, 0.95);
-  border: 1px solid #D4AF37;
-  border-radius: 8px;
-  padding: 12px;
-  z-index: 100;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-  animation: popupIn 0.3s ease forwards;
-}
-
-@keyframes popupIn {
-  from { opacity: 0; transform: translateX(-50%) translateY(10px); }
-  to { opacity: 1; transform: translateX(-50%) translateY(0); }
-}
-
-.popup-arrow {
-  position: absolute;
-  bottom: -6px;
-  left: 50%;
-  transform: translateX(-50%) rotate(45deg);
-  width: 10px;
-  height: 10px;
-  background: #0f0f0f;
-  border-bottom: 1px solid #D4AF37;
-  border-right: 1px solid #D4AF37;
-}
-
-.popup-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-  padding-bottom: 8px;
-  margin-bottom: 8px;
-}
-
-.popup-day-title {
-  color: #FFD700;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.2rem;
-  margin: 0;
-}
-
-.popup-close-btn {
-  background: transparent;
-  border: none;
-  color: #888;
-  font-size: 1.2rem;
-  cursor: pointer;
-  padding: 0 5px;
-}
-
-.popup-event-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-}
-.popup-event-row:last-child { border-bottom: none; }
-
-.popup-time {
-  color: #FFD700;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.1rem;
-  min-width: 35px;
-}
-
-.popup-title {
-  color: #ddd;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 0.8rem;
-  line-height: 1.2;
-  text-align: left;
-}
-
-@media (min-width: 769px) {
-  .timeline-backdrop {
-    display: none !important;
-  }
-}
-
-.minimal-timeline-container {
-  max-width: 900px;
-  margin: 0 auto;
-  position: relative;
-}
-
-.minimal-timeline-nav {
-  position: relative;
-  width: 100%;
-  height: 100px;
-}
-
-/* --- LINHA CURVA SVG --- */
-.svg-curve-container {
-  position: absolute;
-  top: 15px;
-  left: 0;
-  width: 100%;
-  height: 40px;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.timeline-svg {
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-}
-
-.timeline-path {
-  fill: none;
-  stroke: #D4AF37;
-  stroke-width: 1px;
-  filter: drop-shadow(0 0 2px rgba(212, 175, 55, 0.5));
-}
-
-/* --- PONTOS E LABEL --- */
 .timeline-points-wrapper {
   display: flex;
   justify-content: space-between;
@@ -399,7 +173,6 @@
   transition: color 0.3s ease !important;
 }
 
-/* --- POPUP / TOOLTIP --- */
 .timeline-popup {
   position: absolute;
   bottom: 50px; 
@@ -412,10 +185,10 @@
   padding: 12px;
   z-index: 100;
   box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-  animation: popupIn 0.3s ease forwards;
+  animation: popupInDesktop 0.3s ease forwards;
 }
 
-@keyframes popupIn {
+@keyframes popupInDesktop {
   from { opacity: 0; transform: translateX(-50%) translateY(10px); }
   to { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
@@ -481,7 +254,7 @@
   text-align: left;
 }
 
-/* --- CORREÇÃO DEFINITIVA MOBILE --- */
+
 @media (max-width: 768px) {
   .minimal-timeline-section {
     padding: 20px 0 100px;
@@ -496,73 +269,45 @@
   .timeline-points-wrapper {
     justify-content: space-between;
     padding: 0;
+    position: relative; 
   }
 
   .timeline-point-item {
     width: auto;
     flex: 1;
+    position: static; 
+  }
+  
+  .timeline-dot-container {
+    position: relative;
   }
 
+  
   .timeline-popup {
-    width: calc(100vw - 40px); 
-    max-width: 280px;
-    bottom: 55px;
+    position: absolute; 
+    top: auto; 
+    bottom: calc(100% + 20px); 
     left: 50%;
     transform: translateX(-50%);
-    /* Garante que o popup fique sempre dentro da tela */
-    margin-left: 0;
-    margin-right: 0;
+    z-index: 99;
+    width: calc(100vw - 40px);
+    max-width: 320px;
+    animation: popupInMobile 0.3s ease forwards;
   }
 
-  /* Ajuste para o primeiro ponto (esquerda) */
-  .timeline-point-item:first-child .timeline-popup {
-    left: 10px;
-    transform: translateX(0);
-    margin-left: 0;
-  }
-  .timeline-point-item:first-child .popup-arrow {
-    left: 30px;
-    transform: rotate(45deg);
+  @keyframes popupInMobile {
+    from { opacity: 0; transform: translateX(-50%) translateY(15px); }
+    to { opacity: 1; transform: translateX(-50%) translateY(0); }
   }
 
-  /* Ajuste para pontos do meio */
-  .timeline-point-item:nth-child(2) .timeline-popup,
-  .timeline-point-item:nth-child(3) .timeline-popup,
-  .timeline-point-item:nth-child(4) .timeline-popup {
-    left: 50%;
-    transform: translateX(-50%);
-    /* Garante margens de segurança */
-    max-width: min(280px, calc(100vw - 40px));
-  }
-
-  /* Ajuste para o último ponto (direita) */
-  .timeline-point-item:last-child .timeline-popup {
-    left: auto;
-    right: 10px;
-    transform: translateX(0);
-    margin-right: 0;
-  }
-  .timeline-point-item:last-child .popup-arrow {
-    left: auto;
-    right: 30px;
-    transform: rotate(45deg);
+  .popup-arrow {
+    display: none;
   }
 }
 
-/* --- TELAS MUITO PEQUENAS (< 375px) --- */
 @media (max-width: 374px) {
   .timeline-popup {
     width: calc(100vw - 30px) !important;
-    max-width: none !important;
-    font-size: 0.85rem;
-  }
-
-  .timeline-point-item:first-child .timeline-popup {
-    left: 5px !important;
-  }
-
-  .timeline-point-item:last-child .timeline-popup {
-    right: 5px !important;
   }
 
   .popup-day-title {
