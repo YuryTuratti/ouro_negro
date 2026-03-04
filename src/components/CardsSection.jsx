@@ -20,13 +20,21 @@ const CardsSection = () => {
     {
       id: 2,
       textColor: '#E8D7A8',
+      sobretitle: 'ENCONTRO PEDAGÓGICO',
+      title: 'Camisa do Evento',
+      subtitle: 'Vista a nossa história. Edição exclusica Ouro Negro Capoeira',
+      image: '/modelo_camisa.png',
+    },
+    {
+      id: 3,
+      textColor: '#E8D7A8',
       sobretitle: 'OFICINA MUSICAL',
       title: 'Técnicas de Atabaque',
       subtitle: 'Com a Instrutora Navalha',
       image: '/atabaque.png',
     },
     {
-      id: 3,
+      id: 4,
       textColor: '#E8D7A8',
       sobretitle: 'OFICINA MUSICAL',
       title: 'Técnicas de Berimbau e Voz',
@@ -34,7 +42,7 @@ const CardsSection = () => {
       image: '/berimbau.png',
     },
     {
-      id: 4,
+      id: 5,
       textColor: '#E8D7A8',
       sobretitle: 'OFICINA MUSICAL',
       title: 'Técnicas de Pandeiro',
@@ -42,7 +50,7 @@ const CardsSection = () => {
       image: '/contramestra rose.jpeg',
     },
     {
-      id: 5,
+      id: 6,
       textColor: '#E8D7A8',
       sobretitle: 'OFICINA PRÁTICA',
       title: 'Técnicas de Movimentação',

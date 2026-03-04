@@ -140,18 +140,7 @@ const InvestmentSection = ({ onOpenModal }) => { // 🟢 AQUI: Recebemos a funç
           })}
         </div>
 
-        {/* Aviso de Abertura */}
-        <motion.div
-          className="investment-section__notice"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-        >
-          <p className="investment-section__notice-text">
-            Inscrições abertas a partir de <strong>01 de abril de 2026</strong>
-          </p>
-        </motion.div>
+        
       </div>
     </section>
   );
