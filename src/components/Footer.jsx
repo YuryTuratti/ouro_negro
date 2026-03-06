@@ -1,9 +1,26 @@
-import React from 'react';
-import { motion } from 'framer-motion'; // Importante para as animações
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion'; 
 import './Footer.css';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+
+  // 🟢 ESTADO PARA CONTROLAR QUAL FOTO APARECE
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // Array com as fotos e descrições
+  const images = [
+    { src: '/akaesse.jpeg', alt: 'Veterana Akaésse Kaonny' },
+    { src: '/negosam.jpeg', alt: 'Contramestre Negosann' }
+  ];
+
+  // 🟢 TEMPORIZADOR: Troca a foto a cada 4 segundos
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, [images.length]);
 
   // Variantes para o texto (surge da esquerda)
   const textVariants = {
@@ -15,8 +32,8 @@ const Footer = () => {
     }
   };
 
-  // Variantes para a foto (surge da direita com escala)
-  const imageVariants = {
+  // Variantes para a caixa da foto (surge da direita com escala)
+  const imageBoxVariants = {
     hidden: { opacity: 0, x: 50, scale: 0.9 },
     visible: { 
       opacity: 1, 
@@ -24,6 +41,13 @@ const Footer = () => {
       scale: 1, 
       transition: { duration: 1, ease: "easeOut", delay: 0.2 } 
     }
+  };
+
+  // 🟢 Variantes exclusivas para o Fade (transição entre as duas fotos)
+  const fadeVariants = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1, transition: { duration: 1.5 } },
+    exit: { opacity: 0, transition: { duration: 1.5 } }
   };
 
   return (
@@ -36,7 +60,7 @@ const Footer = () => {
           variants={textVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }} // Anima apenas uma vez quando 30% do footer aparecer
+          viewport={{ once: true, amount: 0.3 }} 
         >
           <div className="app-footer__section">
             <h4 className="app-footer__label">Produção Cultural</h4>
@@ -54,9 +78,8 @@ const Footer = () => {
           </div>
 
           <div className="app-footer__socials">
-            {/* Adicionei um hover individual para cada ícone também */}
             <motion.a 
-              href="https://www.instagram.com/ouronegro_capoeira?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
+              href="https://www.instagram.com/ouronegro_capoeira" 
               target="_blank" 
               whileHover={{ scale: 1.2 }}
               className="app-footer__social-link"
@@ -82,20 +105,30 @@ const Footer = () => {
           </div>
         </motion.div>
 
-        {/* COLUNA DIREITA: Foto com Scroll Reveal */}
+        {/* COLUNA DIREITA: Caixa de Fotos Dinâmica */}
         <motion.div 
           className="app-footer__profile"
-          variants={imageVariants}
+          variants={imageBoxVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
         >
           <div className="app-footer__image-ring">
-            <img 
-              src="/akaesse.jpeg" 
-              alt="Akaésse Kaonny" 
-              className="app-footer__image"
-            />
+            <div className="app-footer__image-wrapper">
+              {/* AnimatePresence garante que a imagem velha suma suavemente enquanto a nova entra */}
+              <AnimatePresence>
+                <motion.img 
+                  key={currentImageIndex} // Isso avisa ao React que é uma nova imagem
+                  src={images[currentImageIndex].src} 
+                  alt={images[currentImageIndex].alt} 
+                  className="app-footer__image"
+                  variants={fadeVariants}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                />
+              </AnimatePresence>
+            </div>
           </div>
         </motion.div>
 
