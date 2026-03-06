@@ -1,3 +1,6 @@
+/* ==========================================================================
+   MINIMAL TIMELINE - FINAL ADJUSTED E BLINDADO (NOVO VISUAL ESPAÇOSO)
+   ========================================================================== */
 
 .minimal-timeline-section {
   width: 100%;
@@ -173,24 +176,47 @@
   transition: color 0.3s ease !important;
 }
 
+/* 🟢 POPUP DESKTOP: MAIS LARGO E COM EFEITO PREMIUM */
 .timeline-popup {
   position: absolute;
   bottom: 50px; 
   left: 50%;
   transform: translateX(-50%);
-  width: 240px;
-  background: rgba(15, 15, 15, 0.95);
+  width: 360px; /* Aumentado de 240px para 360px */
+  background: rgba(15, 15, 15, 0.85); /* Fundo levemente mais transparente */
+  backdrop-filter: blur(8px); /* Efeito de vidro esfumaçado atrás do popup */
+  -webkit-backdrop-filter: blur(8px);
   border: 1px solid #D4AF37;
-  border-radius: 8px;
-  padding: 12px;
+  border-radius: 12px; /* Bordas um pouco mais arredondadas */
+  padding: 15px; /* Mais respiro interno */
   z-index: 100;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.9);
   animation: popupInDesktop 0.3s ease forwards;
 }
 
 @keyframes popupInDesktop {
   from { opacity: 0; transform: translateX(-50%) translateY(10px); }
   to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* 🟢 ÁREA DE SCROLL (NOVO): Impede que o popup cresça demais */
+.popup-scroll-area {
+  max-height: 280px; /* Altura máxima no PC */
+  overflow-y: auto; /* Cria a barra de rolagem automática */
+  padding-right: 8px; /* Dá espaço para a barra não encostar no texto */
+}
+
+/* Barra de rolagem dourada e fina (Chrome/Edge/Safari) */
+.popup-scroll-area::-webkit-scrollbar {
+  width: 4px;
+}
+.popup-scroll-area::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+.popup-scroll-area::-webkit-scrollbar-thumb {
+  background: #D4AF37;
+  border-radius: 4px;
 }
 
 .popup-arrow {
@@ -200,7 +226,7 @@
   transform: translateX(-50%) rotate(45deg);
   width: 10px;
   height: 10px;
-  background: #0f0f0f;
+  background: #151515; /* Sincronizado com o fundo novo */
   border-bottom: 1px solid #D4AF37;
   border-right: 1px solid #D4AF37;
 }
@@ -210,15 +236,16 @@
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-  padding-bottom: 8px;
-  margin-bottom: 8px;
+  padding-bottom: 10px; /* Mais espaço no cabeçalho */
+  margin-bottom: 12px;
 }
 
 .popup-day-title {
   color: #FFD700;
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.2rem;
+  font-size: 1.4rem; /* Título um pouco maior */
   margin: 0;
+  letter-spacing: 1px;
 }
 
 .popup-close-btn {
@@ -228,13 +255,18 @@
   font-size: 1.2rem;
   cursor: pointer;
   padding: 0 5px;
+  transition: color 0.3s;
+}
+
+.popup-close-btn:hover {
+  color: #FFD700;
 }
 
 .popup-event-row {
   display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 0;
+  align-items: flex-start; /* Alinhado pelo topo ao invés do centro */
+  gap: 12px; /* Mais espaço entre hora e texto */
+  padding: 10px 0; /* Mais espaço entre as linhas */
   border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 .popup-event-row:last-child { border-bottom: none; }
@@ -242,19 +274,23 @@
 .popup-time {
   color: #FFD700;
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.1rem;
-  min-width: 35px;
+  font-size: 1.2rem; /* Hora um pouco maior e mais legível */
+  min-width: 45px;
+  margin-top: 2px; /* Alinhamento fino com a primeira linha do título */
 }
 
 .popup-title {
-  color: #ddd;
+  color: #eee;
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.8rem;
-  line-height: 1.2;
+  font-size: 0.85rem;
+  font-weight: 600; /* Título principal mais gordinho */
+  line-height: 1.3;
   text-align: left;
 }
 
-
+/* ==========================================================================
+   MOBILE - MANTENDO A RESPONSIVIDADE
+   ========================================================================== */
 @media (max-width: 768px) {
   .minimal-timeline-section {
     padding: 20px 0 100px;
@@ -281,8 +317,8 @@
   .timeline-dot-container {
     position: relative;
   }
-
   
+  /* 🟢 POPUP MOBILE: Largura expandida para melhor leitura */
   .timeline-popup {
     position: absolute; 
     top: auto; 
@@ -290,9 +326,14 @@
     left: 50%;
     transform: translateX(-50%);
     z-index: 99;
-    width: calc(100vw - 40px);
-    max-width: 320px;
+    width: calc(100vw - 30px); /* Ocupa melhor a tela, margem menor */
+    max-width: 400px; /* Aumentado de 320px para não espremer o conteúdo */
     animation: popupInMobile 0.3s ease forwards;
+  }
+
+  /* Altura de scroll adaptável para celulares */
+  .popup-scroll-area {
+    max-height: 55vh; /* Ocupa no máximo 55% da tela do celular, o resto é rolagem */
   }
 
   @keyframes popupInMobile {
@@ -307,19 +348,19 @@
 
 @media (max-width: 374px) {
   .timeline-popup {
-    width: calc(100vw - 30px) !important;
+    width: calc(100vw - 20px) !important; /* Aproveita quase 100% em telas minúsculas */
   }
 
   .popup-day-title {
-    font-size: 1rem;
+    font-size: 1.2rem;
   }
 
   .popup-time {
-    font-size: 0.95rem;
-    min-width: 30px;
+    font-size: 1.1rem;
+    min-width: 38px;
   }
 
   .popup-title {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
   }
 }

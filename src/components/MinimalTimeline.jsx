@@ -5,15 +5,44 @@ import './MinimalTimeline.css';
 const scheduleData = [
   {
     id: 'sex', day: "SEXTA", date: "10/07",
-    events: [ { time: "18:00", title: "Credenciamento", icon: "📝" }, { time: "19:30", title: "Roda de Abertura", icon: "🔥" }, { time: "21:00", title: "Jantar", icon: "🍽️" } ]
+    events: [
+      { time: "18:00", title: "Credenciamento", icon: "bi bi-person-vcard" },
+      { time: "19:30", title: "Ciclo de Palestras", icon: "bi bi-mic-fill", subEvents: [
+        { speaker: "Akaésse Kaonny", topic: "Além do Pódio: O que ninguém te conta sobre ser uma atleta em busca do autorendimento." },
+        { speaker: "Gisele Rezende", topic: "Nutrição Esportiva Feminina: A ciência por trás da performance máxima." },
+        { speaker: "Mestra Luciana", topic: "Entre a Tradição e o Pódio: Corpo, Identidade e Alta Performance na Capoeira." }
+      ]},
+      { time: "21:00", title: "Jantar", icon: "bi bi-shop" }
+    ]
   },
   {
     id: 'sab', day: "SÁBADO", date: "11/07",
-    events: [ { time: "08:00", title: "Café da Manhã", icon: "☕" }, { time: "09:30", title: "Vivência Angola", icon: "🤸‍♀️" }, { time: "12:00", title: "Almoço", icon: "🥘" }, { time: "14:00", title: "Workshop", icon: "🪘" }, { time: "16:30", title: "Roda Aberta", icon: "☀️" } ]
+    events: [
+      { time: "07:00", title: "Café da Manhã e Cred", description: 'Entrega do kit: "Tesouro Ouro Negro" e camiseta oficial.', icon: "bi bi-cup-hot-fill" },
+      { time: "08:00", title: "Mestra Luciana", description: "Dominando a Roda: Inteligência Tática e Movimentação Progressiva.", icon: "bi bi-lightning-charge-fill" },
+      { time: "08:50", title: "Instrutora Navalha Fiu (Atabaque)", description: "Variações e viradas: Como sair do básico sem perder a cadência.", icon: "bi bi-music-note-list" },
+      { time: "09:40", title: "Professora Dandara", description: "Ginga de Alto Rendimento: O Caminho para o Pódio.", icon: "bi bi-award-fill" },
+      { time: "10:30", title: "Roda de Ouro", description: "Colocando o aprendizado em prática.", icon: "bi bi-fire" },
+      { time: "11:30", title: "Resenha Gastronômica", description: "Nutrição, troca de conhecimento e descanso.", icon: "bi bi-shop" },
+      { time: "14:00", title: "Contramestra Rose (Pandeiro)", description: "Pandeiro de Ouro: Técnica e floreio dominando o ritmo.", icon: "bi bi-music-note-beamed" },
+      { time: "14:50", title: "Mestranda Sinhá", description: "Fundamento e Explosão: A Tática de Ouro construindo o jogo das campeãs.", icon: "bi bi-lightning-fill" },
+      { time: "15:40", title: "Monitora Anhuma (Berimbau)", description: "O fundamento de ouro: A arte de reger o axé e o poder da voz.", icon: "bi bi-music-note" },
+      { time: "16:30", title: "Roda de Ouro", description: "Colocando o aprendizado e fundamento em prática.", icon: "bi bi-fire" },
+      { time: "20:00", title: "Show Cultural", description: "A Noite do Ouro: O espetáculo da força feminina.", icon: "bi bi-stars" }
+    ]
   },
   {
     id: 'dom', day: "DOMINGO", date: "12/07",
-    events: [ { time: "09:00", title: "Papo de Mestre", icon: "🗣️" }, { time: "11:00", title: "Encerramento", icon: "🎓" }, { time: "13:00", title: "Despedida", icon: "👋" } ]
+    events: [
+      { time: "09:00", title: "Café da manhã", description: "O Despertar Musical.", icon: "bi bi-cup-hot-fill" },
+      { time: "10:00", title: "Ciclo de Palestras", icon: "bi bi-mic-fill", subEvents: [
+        { speaker: "Rosângela (Psicóloga)", topic: "A Esquiva do Medo: Fortalecendo a Mente para o Jogo da Vida." },
+        { speaker: "Ana Flávia (Secretária das mulheres)", topic: "Além da roda: Sintonizando sua saúde com as fases do mês." },
+        { speaker: "Patrícia Barreto (Biomédica)", topic: "Ouro na pele: Como o cuidado com a beleza potencializa a confiança na roda." }
+      ]},
+      { time: "11:30", title: "Cerimônia de Premiação", description: 'Entrega de certificados e títulos "Destaque Ouro Negro".', icon: "bi bi-trophy-fill" },
+      { time: "12:00", title: "Encerramento", description: "Almoço e tardezinha com o Fuzuê Samba Soul.", icon: "bi bi-balloon-fill" }
+    ]
   }
 ];
 
@@ -127,7 +156,6 @@ const MinimalTimeline = () => {
                       scale: [1, 1.3, 1] 
                     }}
                     viewport={{ once: true }}
-                    // Usamos "linear" no flicker para as trocas serem mais secas e realistas
                     transition={{ duration: animDuration, delay: 0.5 + (index * 0.5), ease: isFlickeringLight ? "linear" : "easeInOut" }}
                   />
                   
@@ -161,11 +189,37 @@ const MinimalTimeline = () => {
                       <h3 className="popup-day-title">{day.day}</h3>
                       <button className="popup-close-btn" onClick={() => setActiveDayIndex(null)}>✕</button>
                     </div>
+                    
                     <div className="popup-scroll-area">
                       {day.events.map((event, idx) => (
-                        <div key={idx} className="popup-event-row">
-                          <span className="popup-time">{event.time}</span>
-                          <span className="popup-title">{event.icon} {event.title}</span>
+                        <div key={idx} className="popup-event-row" style={{ alignItems: 'flex-start' }}>
+                          <span className="popup-time" style={{ minWidth: '45px' }}>{event.time}</span>
+                          
+                          <div className="popup-event-details" style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+                            {/* 🟢 TROCAMOS O EMOJI PELO ÍCONE DO BOOTSTRAP */}
+                            <span className="popup-title" style={{ fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                              <i className={event.icon} style={{ color: '#D4AF37', fontSize: '1rem' }}></i> 
+                              {event.title}
+                            </span>
+                            
+                            {/* Renderiza a descrição normal se existir */}
+                            {event.description && (
+                              <span className="popup-description" style={{ fontSize: '0.75rem', color: '#ccc', marginTop: '3px', lineHeight: '1.3' }}>
+                                {event.description}
+                              </span>
+                            )}
+
+                            {/* Renderiza a lista de palestrantes se existir */}
+                            {event.subEvents && (
+                              <ul className="popup-subevents-list" style={{ paddingLeft: '15px', marginTop: '8px', listStyleType: 'disc', color: '#ccc', fontSize: '0.75rem', lineHeight: '1.4', margin: 0 }}>
+                                {event.subEvents.map((sub, subIdx) => (
+                                  <li key={subIdx} style={{ marginBottom: '6px' }}>
+                                    <strong style={{ color: '#E8D7A8' }}>{sub.speaker}:</strong> {sub.topic}
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
+                          </div>
                         </div>
                       ))}
                       <div style={{ height: '10px' }}></div>
