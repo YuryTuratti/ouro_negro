@@ -74,7 +74,7 @@ const Footer = () => {
 
           <div className="app-footer__section">
             <h4 className="app-footer__label">Coordenação</h4>
-            <p className="app-footer__value">Contramestre Negosann</p>
+            <p className="app-footer__value">Contramestre Negosan</p>
           </div>
 
           <div className="app-footer__socials">
