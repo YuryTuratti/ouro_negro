@@ -7,8 +7,7 @@ import {
   validateAge, 
   validateCity,
   formatPhone,
-  errorMessages,
-  validateForm
+  errorMessages
 } from '../utils/validation';
 import './FormSection.css';
 
@@ -60,6 +59,9 @@ const FormSection = ({ formRef }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
+  // 🟢 Variável de estado para controlar a imagem da tabela de tamanhos
+  const [isImageOpen, setIsImageOpen] = useState(false);
+
   // Debounce para validação
   const [validationTimeout, setValidationTimeout] = useState(null);
 
@@ -70,7 +72,7 @@ const FormSection = ({ formRef }) => {
     let error = '';
 
     // Campos opcionais que não precisam de validação de "required"
-    const optionalFields = ['nickname', 'transportOther', 'accessibility', 'trajectory', 'vision', 'essentials'];
+    const optionalFields = ['nickname', 'transportOther', 'accessibility', 'trajectory', 'vision', 'essentials', 'soloShow'];
 
     if (!value && !optionalFields.includes(fieldName)) {
       error = errorMessages.required || 'Este campo é obrigatório';
@@ -82,7 +84,7 @@ const FormSection = ({ formRef }) => {
         case 'email':
           if (!validateEmail(value)) error = errorMessages.email;
           break;
-        case 'phone': // 🟢 CORREÇÃO: Contato de emergência removido daqui
+        case 'phone': 
           if (!validatePhone(value)) error = errorMessages.phone;
           break;
         case 'age':
@@ -109,7 +111,7 @@ const FormSection = ({ formRef }) => {
     // Lida com radio buttons e máscaras
     if (type === 'radio') {
       finalValue = checked ? value : formData[name];
-    } else if (name === 'phone') { // 🟢 CORREÇÃO: Contato de emergência removido daqui
+    } else if (name === 'phone') { 
       finalValue = formatPhone(value);
     }
 
@@ -179,7 +181,6 @@ const FormSection = ({ formRef }) => {
       setSubmitSuccess(true);
       
       setTimeout(() => {
-        // Reset opcional, ou redirecionamento para pagamento
         setSubmitSuccess(false);
       }, 3000);
       
@@ -215,9 +216,7 @@ const FormSection = ({ formRef }) => {
 
           <form onSubmit={handleSubmit} noValidate>
             
-            {/* ==========================================
-                1. DADOS PESSOAIS 
-                ========================================== */}
+            {/* 1. DADOS PESSOAIS */}
             <h3 className="form-section__group-title">1. Dados Pessoais</h3>
             <div className="form-grid">
               
@@ -229,8 +228,6 @@ const FormSection = ({ formRef }) => {
                   placeholder="Digite seu nome completo"
                   className={`form-input ${errors.name && touched.name ? 'form-input--error' : ''}`}
                   required aria-required="true"
-                  aria-invalid={errors.name && touched.name ? 'true' : 'false'}
-                  aria-describedby={errors.name && touched.name ? 'name-error' : undefined}
                 />
                 {errors.name && touched.name && <span id="name-error" className="form-error" role="alert">{errors.name}</span>}
               </div>
@@ -253,7 +250,6 @@ const FormSection = ({ formRef }) => {
                   placeholder="Ex: Aluno, Graduado, Professor"
                   className={`form-input ${errors.graduation && touched.graduation ? 'form-input--error' : ''}`}
                   required aria-required="true"
-                  aria-invalid={errors.graduation && touched.graduation ? 'true' : 'false'}
                 />
                 {errors.graduation && touched.graduation && <span className="form-error" role="alert">{errors.graduation}</span>}
               </div>
@@ -319,9 +315,7 @@ const FormSection = ({ formRef }) => {
               </div>
             </div>
 
-            {/* ==========================================
-                2. LOGÍSTICA E TRANSPORTE
-                ========================================== */}
+            {/* 2. LOGÍSTICA E TRANSPORTE */}
             <h3 className="form-section__group-title">2. Logística e Transporte</h3>
             <div className="form-grid">
               
@@ -405,41 +399,34 @@ const FormSection = ({ formRef }) => {
               </div>
             </div>
 
-            {/* ==========================================
-                3. PARTICIPAÇÃO
-                ========================================== */}
+            {/* 3. PARTICIPAÇÃO */}
             <h3 className="form-section__group-title">3. Participação</h3>
             <div className="form-grid">
               
-              <div className="form-group">
-                <label className="form-label">Deseja apresentar solo (30s)? <span aria-label="obrigatório">*</span></label>
-                <div className="form-radio-group">
-                  <label className="radio-label">
-                    <input type="radio" name="soloShow" value="Sim" onChange={handleChange} checked={formData.soloShow === 'Sim'} /> Sim
-                  </label>
-                  <label className="radio-label">
-                    <input type="radio" name="soloShow" value="Não" onChange={handleChange} checked={formData.soloShow === 'Não'} /> Não
-                  </label>
-                </div>
-                {errors.soloShow && touched.soloShow && <span className="form-error" role="alert">{errors.soloShow}</span>}
-              </div>
-
-              <div className="form-group">
+              <div className="form-group form-group--full">
                 <label className="form-label">Tamanho da Camiseta <span aria-label="obrigatório">*</span></label>
-                <div className="form-radio-group">
-                  {['P', 'M', 'G', 'GG', 'XG'].map(size => (
-                    <label key={size} className="radio-label">
-                      <input type="radio" name="tshirtSize" value={size} onChange={handleChange} checked={formData.tshirtSize === size} /> {size}
-                    </label>
-                  ))}
+                
+                <div className="tshirt-selection-container">
+                  <div className="form-radio-group">
+                    {['BLP','BLM','BLG','BLGG','P', 'M', 'G', 'GG', 'EXG'].map(size => (
+                      <label key={size} className="radio-label">
+                        <input type="radio" name="tshirtSize" value={size} onChange={handleChange} checked={formData.tshirtSize === size} /> {size}
+                      </label>
+                    ))}
+                  </div>
+
+                  {/* MINIATURA DA IMAGEM */}
+                  <div className="tshirt-thumbnail" onClick={() => setIsImageOpen(true)}>
+                    <img src="/tamanho_camisa.jpeg" alt="Tabela de Tamanhos" />
+                    <span className="tshirt-thumbnail-text">Ver tabela</span>
+                  </div>
                 </div>
+
                 {errors.tshirtSize && touched.tshirtSize && <span className="form-error" role="alert">{errors.tshirtSize}</span>}
               </div>
             </div>
 
-            {/* ==========================================
-                4. ACESSIBILIDADE E EMERGÊNCIA
-                ========================================== */}
+            {/* 4. ACESSIBILIDADE E EMERGÊNCIA */}
             <h3 className="form-section__group-title">4. Acessibilidade</h3>
             <div className="form-grid">
               <div className="form-group form-group--full">
@@ -465,9 +452,7 @@ const FormSection = ({ formRef }) => {
               </div>
             </div>
 
-            {/* ==========================================
-                5. EXPECTATIVAS E TRAJETÓRIA
-                ========================================== */}
+            {/* 5. EXPECTATIVAS E TRAJETÓRIA */}
             <h3 className="form-section__group-title">5. Expectativas e Trajetória</h3>
             <div className="form-grid">
               
@@ -502,9 +487,7 @@ const FormSection = ({ formRef }) => {
               </div>
             </div>
 
-            {/* ==========================================
-                6. TERMOS
-                ========================================== */}
+            {/* 6. TERMOS */}
             <h3 className="form-section__group-title">6. Termo de Imagem e Voz</h3>
             <div className="form-group form-group--full">
               <p style={{ color: '#E8D7A8', fontSize: '0.9rem', marginBottom: '15px', lineHeight: '1.5' }}>
@@ -535,6 +518,17 @@ const FormSection = ({ formRef }) => {
           </form>
         </div>
       </div>
+
+      {/* 🟢 MODAL DE TELA CHEIA MOVIDO PARA FORA DO FORMULÁRIO (ISSO RESOLVE O BUG!) */}
+      {isImageOpen && (
+        <div className="tshirt-modal-overlay" onClick={() => setIsImageOpen(false)}>
+          <div className="tshirt-modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="tshirt-modal-close" onClick={() => setIsImageOpen(false)}>✕</button>
+            <img src="/tamanho_camisa.jpeg" alt="Tabela de Tamanhos Ampliada" className="tshirt-modal-image" />
+          </div>
+        </div>
+      )}
+
     </section>
   );
 };

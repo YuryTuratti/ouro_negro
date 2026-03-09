@@ -13,7 +13,7 @@ const CardsSection = () => {
       id: 1,
       textColor: '#E8D7A8',
       sobretitle: 'MEGA ESTRUTURA',
-      title: 'Estrutura do Evento',
+      title: 'Show Ouro Negro Capoeira',
       subtitle: 'Palco monumental com som, iluminação e telões de alta definição.',
       image: '/estrutura_capoeira.jpeg',
     },
@@ -54,9 +54,26 @@ const CardsSection = () => {
       textColor: '#E8D7A8',
       sobretitle: 'OFICINA PRÁTICA',
       title: 'Técnicas de Movimentação',
-      subtitle: 'Com Mestra Luciana, Mestranda Sinhá, Professora Dandara',
+      subtitle: 'Com Mestra Luciana',
       image: '/movimentacao.jpeg',
     },
+    {
+      id: 7,
+      textColor: '#E8D7A8',
+      sobretitle: 'OFICINA PRÁTICA',
+      title: 'Técnicas de Movimentação',
+      subtitle: 'Mestranda Sinhá',
+      image: '/movimentacao.jpeg',
+    },
+    {
+      id: 8,
+      textColor: '#E8D7A8',
+      sobretitle: 'OFICINA PRÁTICA',
+      title: 'Técnicas de Movimentação',
+      subtitle: 'Professora Dandara',
+      image: '/movimentacao.jpeg',
+    },
+
   ];
 
   // Variantes de animação para os cards

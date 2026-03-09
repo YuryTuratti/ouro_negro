@@ -134,7 +134,6 @@
   background-size: 12px auto;
 }
 
-/* 🟢 CORREÇÃO: Fundo escuro nas opções do select */
 .form-select option {
   background-color: #2A0515;
   color: #E8D7A8;
@@ -181,7 +180,6 @@
   appearance: textfield;
 }
 
-/* 🟢 CORREÇÃO: Radio Buttons Customizados */
 .form-radio-group {
   display: flex;
   flex-wrap: wrap;
@@ -326,4 +324,118 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TABELA DE TAMANHOS (MINIATURA E MODAL TELA CHEIA)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Container flex para opções e imagem ficarem lado a lado */
+.tshirt-selection-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 10px;
+  flex-wrap: wrap; /* Para não quebrar a tela no celular */
+}
+
+/* O grupo de rádios ocupa o espaço que sobrar */
+.tshirt-selection-container .form-radio-group {
+  flex: 1;
+  margin-top: 0;
+}
+
+/* --- ESTILO DA MINIATURA --- */
+.tshirt-thumbnail {
+  width: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.tshirt-thumbnail:hover {
+  transform: scale(1.05);
+}
+
+.tshirt-thumbnail img {
+  width: 100%;
+  border-radius: 8px;
+  border: 2px solid #D4AF37;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+  object-fit: cover;
+}
+
+.tshirt-thumbnail-text {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.75rem;
+  color: #D4AF37;
+  margin-top: 5px;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* --- ESTILO DO MODAL TELA CHEIA --- */
+.tshirt-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(10, 5, 8, 0.95); /* Fundo bem escuro no tema do site */
+  z-index: 99999; /* Fica acima de TUDO no site */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  animation: fadeInModal 0.3s ease forwards;
+}
+
+@keyframes fadeInModal {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.tshirt-modal-content {
+  position: relative;
+  max-width: 95vw;
+  max-height: 90vh;
+}
+
+.tshirt-modal-image {
+  max-width: 100%;
+  max-height: 90vh;
+  border-radius: 12px;
+  border: 3px solid #D4AF37;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+  object-fit: contain; 
+}
+
+
+.tshirt-modal-close {
+  position: absolute;
+  top: 10px;   
+  right: 10px; 
+  width: 40px;
+  height: 40px;
+  background: #D4AF37;
+  color: #2A0515;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.9);
+  transition: background 0.3s ease, transform 0.3s ease;
+  z-index: 10; 
+}
+
+.tshirt-modal-close:hover {
+  background: #FFD700;
+  transform: scale(1.1);
 }

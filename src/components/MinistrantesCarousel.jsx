@@ -11,11 +11,11 @@ const ParticipantesCarousel = () => {
   const participantes = [
     // --- MINISTRANTES ---
     { id: 1, categoria: 'MINISTRANTES', nome: 'Mestra Luciana', imagem: '/mestra luciana.jpeg' },
-    { id: 2, categoria: 'MINISTRANTES', nome: 'Contramestra Rose', imagem: '/contramestra rose.jpeg' },
-    { id: 3, categoria: 'MINISTRANTES', nome: 'Mestranda Sinhá', imagem: '/mestranda sinhá.jpeg' },
+    { id: 2, categoria: 'MINISTRANTES', nome: 'Mestranda Sinhá', imagem: '/mestranda sinhá.jpeg' },
+    { id: 3, categoria: 'MINISTRANTES', nome: 'Contramestra Rose', imagem: '/contramestra rose.jpeg' },
     { id: 4, categoria: 'MINISTRANTES', nome: 'Professora Dandara', imagem: '/professora dandara.jpeg' },
-    { id: 5, categoria: 'MINISTRANTES', nome: 'Instrutora Navalha', imagem: '/instrutora navalha.jpeg' },
-    { id: 6, categoria: 'MUSICALIDADE', nome: 'Monitora Anhuma', imagem: '/monitora_anhuma.jpeg' },
+    { id: 5, categoria: 'MINISTRANTES', nome: 'Monitora Anhuma', imagem: '/monitora_anhuma.jpeg' },
+    { id: 6, categoria: 'MINISTRANTES', nome: 'Instrutora Navalha', imagem: '/instrutora navalha.jpeg' },
     { id: 7, categoria: 'MUSICALIDADE', nome: 'Professora Presença', imagem: '/musicalidade_presença.jpeg' },
     { id: 8, categoria: 'MUSICALIDADE', nome: 'Professora Pantera', imagem: '/musicalidade_pantera.jpeg' },
     { id: 9, categoria: 'PRESENÇAS ESPECIAIS', nome: 'Professora Lu', imagem: '/especial_lu.jpeg' },
