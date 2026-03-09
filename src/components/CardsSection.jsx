@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import './CardsSection.css';
 
@@ -7,6 +7,9 @@ import './CardsSection.css';
  * Seção de cards estilo Apple com informações sobre o evento
  */
 const CardsSection = () => {
+  // ESTADO PARA CONTROLAR O MODAL DO CARD
+  const [selectedCard, setSelectedCard] = useState(null);
+
   // Dados dos cards - Paleta OURO NEGRO
   const cardsData = [
     {
@@ -16,14 +19,16 @@ const CardsSection = () => {
       title: 'Show Ouro Negro Capoeira',
       subtitle: 'Palco monumental com som, iluminação e telões de alta definição.',
       image: '/estrutura_capoeira.jpeg',
+      description: 'Prepare-se para um espetáculo inesquecível. Uma noite dedicada a celebrar a força, a ancestralidade e o poder da mulher na capoeira com uma estrutura de som e luz de tirar o fôlego.'
     },
     {
       id: 2,
       textColor: '#E8D7A8',
       sobretitle: 'ENCONTRO PEDAGÓGICO',
       title: 'Camisa do Evento',
-      subtitle: 'Vista a nossa história. Edição exclusica Ouro Negro Capoeira',
+      subtitle: 'Vista a nossa história. Edição exclusiva Ouro Negro Capoeira.',
       image: '/modelo_camisa.png',
+      description: 'Garanta a sua armadura para este encontro. O kit inclui a camisa oficial com design exclusivo, desenvolvida especialmente para o evento deste ano.'
     },
     {
       id: 3,
@@ -32,6 +37,7 @@ const CardsSection = () => {
       title: 'Técnicas de Atabaque',
       subtitle: 'Com a Instrutora Navalha',
       image: '/atabaque.png',
+      description: 'Mergulhe nos ritmos ancestrais. Aprenda variações, viradas e como sair do básico sem perder a cadência que rege a roda.'
     },
     {
       id: 4,
@@ -40,6 +46,7 @@ const CardsSection = () => {
       title: 'Técnicas de Berimbau e Voz',
       subtitle: 'Com Monitora Anhuma',
       image: '/berimbau.png',
+      description: 'O fundamento de ouro: a arte de reger o axé. Descubra o poder da voz e a firmeza no toque do instrumento sagrado da nossa arte.'
     },
     {
       id: 5,
@@ -48,6 +55,7 @@ const CardsSection = () => {
       title: 'Técnicas de Pandeiro',
       subtitle: 'Com Contramestra Rose',
       image: '/contramestra rose.jpeg',
+      description: 'Pandeiro de Ouro: técnica, floreio e domínio do ritmo. Aprenda a preencher as lacunas do toque com maestria e malandragem.'
     },
     {
       id: 6,
@@ -56,24 +64,26 @@ const CardsSection = () => {
       title: 'Técnicas de Movimentação',
       subtitle: 'Com Mestra Luciana',
       image: '/movimentacao.jpeg',
+      description: 'Dominando a Roda: Inteligência Tática e Movimentação Progressiva. Como usar o espaço a seu favor e construir um jogo imbatível.'
     },
     {
       id: 7,
       textColor: '#E8D7A8',
       sobretitle: 'OFICINA PRÁTICA',
       title: 'Técnicas de Movimentação',
-      subtitle: 'Mestranda Sinhá',
+      subtitle: 'Com Mestranda Sinhá',
       image: '/movimentacao.jpeg',
+      description: 'Fundamento e Explosão: A Tática de Ouro construindo o jogo das campeãs. Aprenda a aliar tradição com alta performance.'
     },
     {
       id: 8,
       textColor: '#E8D7A8',
       sobretitle: 'OFICINA PRÁTICA',
       title: 'Técnicas de Movimentação',
-      subtitle: 'Professora Dandara',
+      subtitle: 'Com Professora Dandara',
       image: '/movimentacao.jpeg',
+      description: 'Ginga de Alto Rendimento: O Caminho para o Pódio. Preparação física, foco e precisão para quem busca competir no mais alto nível.'
     },
-
   ];
 
   // Variantes de animação para os cards
@@ -81,30 +91,22 @@ const CardsSection = () => {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
+      transition: { staggerChildren: 0.2 },
     },
   };
 
   const cardVariants = {
-    hidden: { 
-      opacity: 0, 
-      y: 40 
-    },
+    hidden: { opacity: 0, y: 40 },
     visible: { 
-      opacity: 1, 
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.22, 1, 0.36, 1],
-      },
+      opacity: 1, y: 0,
+      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
     },
   };
 
   return (
     <section className="cards-section" aria-label="Eventos e atividades">
       <div className="cards-section__container">
+        
         {/* Grid de cards */}
         <motion.div
           className="cards-section__grid"
@@ -118,11 +120,20 @@ const CardsSection = () => {
               key={card.id}
               className="card"
               variants={cardVariants}
-              whileHover={{ 
-                y: -5,
-                transition: { duration: 0.3 }
-              }}
+              whileHover={{ y: -5, transition: { duration: 0.3 } }}
+              onClick={() => setSelectedCard(card)} 
             >
+              {/* IMAGEM NO TOPO */}
+              <div className="card__image">
+                <img 
+                  src={card.image} 
+                  alt={card.title} 
+                  className="card__img" 
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
+              </div>
+
+              {/* TEXTOS EMBAIXO */}
               <div className="card__content">
                 <p className="card__sobretitle" style={{ color: '#D4AF37' }}>
                   {card.sobretitle}
@@ -136,24 +147,47 @@ const CardsSection = () => {
                   {card.subtitle}
                 </p>
                 
-                <p className="card__info" style={{ color: '#C9A961' }}>
-                  {card.info}
-                </p>
-              </div>
+                {card.info && (
+                  <p className="card__info" style={{ color: '#C9A961' }}>
+                    {card.info}
+                  </p>
+                )}
 
-              {/* Área de imagem */}
-              <div className="card__image">
-                <img 
-                  src={card.image} 
-                  alt={card.title} 
-                  className="card__img" 
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                />
+                {/* 🟢 NOVO: DICA VISUAL PARA CLICAR */}
+                <div className="card__action">
+                  VER DETALHES <span className="arrow">→</span>
+                </div>
               </div>
             </motion.article>
           ))}
         </motion.div>
       </div>
+
+      {/* MODAL DE DETALHES DO CARD TELA CHEIA */}
+      {selectedCard && (
+        <div className="card-modal-overlay" onClick={() => setSelectedCard(null)}>
+          <div className="card-modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="card-modal-close" onClick={() => setSelectedCard(null)}>✕</button>
+            
+            <div className="card-modal-image-container">
+              <img src={selectedCard.image} alt={selectedCard.title} className="card-modal-image" />
+            </div>
+            
+            <div className="card-modal-info">
+              <p className="card-modal-sobretitle">{selectedCard.sobretitle}</p>
+              <h3 className="card-modal-title">{selectedCard.title}</h3>
+              <p className="card-modal-subtitle">{selectedCard.subtitle}</p>
+              
+              <p className="card-modal-description">{selectedCard.description}</p>
+              
+              <a href="#inscricao" className="card-modal-btn" onClick={() => setSelectedCard(null)}>
+                Fazer minha inscrição
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
+
     </section>
   );
 };
